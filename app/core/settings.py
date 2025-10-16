@@ -31,7 +31,7 @@ print("DEBUG ENV:", os.environ.get('DJANGO_SECRET_KEY'))
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-t(pys)cgbf!mux3-@s=ptk5=@rknij2rg-lc1gqngmb8sw)(f1'
+
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
