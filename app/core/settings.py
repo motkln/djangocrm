@@ -11,15 +11,29 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env_path = BASE_DIR / '.env'
+if env_path.exists():
+    with open(env_path) as f:
+        for line in f:
+            # убираем комментарии и пустые строки
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            key, value = line.split('=', 1)
+            os.environ[key] = value
+print("DEBUG ENV:", os.environ.get('DJANGO_SECRET_KEY'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-t(pys)cgbf!mux3-@s=ptk5=@rknij2rg-lc1gqngmb8sw)(f1'
+# SECRET_KEY = 'django-insecure-t(pys)cgbf!mux3-@s=ptk5=@rknij2rg-lc1gqngmb8sw)(f1'
+
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
